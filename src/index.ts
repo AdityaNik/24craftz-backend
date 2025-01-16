@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-import userRouter from '../userRoutes';
-import authRouter from './auth'
+import userRouter from './routes/userRoutes';
+import authRouter from './routes/auth'
 require('dotenv').config();
 
 
