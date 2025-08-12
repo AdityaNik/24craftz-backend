@@ -70,10 +70,11 @@ router.post('/signin', async (req, res) => {
 
 router.post('/signup', async (req, res) => {
     let { fullName, phoneNumber, email, role, password, state, city, gender, age, preferences } = req.body;
-    console.log(req.body);
+    console.log('hello all');
     if(!fullName || !phoneNumber || !email || !password) {
         return res.status(400).json({ msg: 'Please provide all fields' });
     }
+    console.log(req.body);
 
     if(gender == "Male") {
         gender = 'male';
@@ -86,6 +87,8 @@ router.post('/signup', async (req, res) => {
         if(user) {
             return res.status(400).json({ msg: 'User already exists' });
         }
+
+        console.log(user + " ");
 
         const newUser = new User({
             fullName: fullName,
