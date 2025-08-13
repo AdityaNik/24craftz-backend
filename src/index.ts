@@ -16,7 +16,19 @@ app.use('/auth', authRouter);
 
 const port = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/24craftz-backend');
+// MongoDB connection
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/24craftz-backend');
+        console.log('MongoDB connected successfully');
+    } catch (error) {
+        console.error('MongoDB connection error:', error);
+        process.exit(1);
+    }
+};
+
+// Connect to database
+connectDB();
 
 app.listen(port, () => {
     console.log(`Backend started on port ${port}`);

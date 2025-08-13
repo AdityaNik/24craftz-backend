@@ -1,4 +1,7 @@
 import express from "express"
+import jwt from "jsonwebtoken";
+import { User } from "../db/db";
+require('dotenv').config();
 
 const router = express.Router();
 
@@ -27,12 +30,6 @@ router.get('/getApplicationReceived', (req, res) => {
 })
 
 
-router.get('/getUserInfo/:id', (req, res) => {
-    res.json({
-        msg: 'all right'
-    })
-})
-
 
 router.get('/userWork', (req, res) => {
     res.json({
@@ -40,5 +37,15 @@ router.get('/userWork', (req, res) => {
     })
 })
 
+router.get('/userProfile', async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json({
+            users
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch users' });
+    }
+});
 
 export default router;
