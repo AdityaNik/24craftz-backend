@@ -77,13 +77,22 @@ router.post('/signin', (req, res) => __awaiter(void 0, void 0, void 0, function*
 }));
 router.post('/signup', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let { fullName, phoneNumber, email, role, password, state, city, gender, age, preferences } = req.body;
+    console.log('hello all');
     if (!fullName || !phoneNumber || !email || !password) {
         return res.status(400).json({ msg: 'Please provide all fields' });
+    }
+    console.log(req.body);
+    if (gender == "Male") {
+        gender = 'male';
+    }
+    if (gender == 'Female') {
+        gender = 'female';
     }
     db_1.User.findOne({ phoneNumber: phoneNumber }).then((user) => {
         if (user) {
             return res.status(400).json({ msg: 'User already exists' });
         }
+        console.log(user + " ");
         const newUser = new db_1.User({
             fullName: fullName,
             phoneNumber: phoneNumber,
@@ -100,6 +109,7 @@ router.post('/signup', (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
         newUser.save();
         const token = jsonwebtoken_1.default.sign({ username: phoneNumber }, Secret);
+        console.log(newUser);
         res.json({
             msg: 'User created successfully',
             token: token
