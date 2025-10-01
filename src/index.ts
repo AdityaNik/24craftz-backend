@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
 import userRouter from "./routes/userRoutes";
-import authRouter from "./routes/auth";
+import talentAuthRouter from "./routes/talentAuth";
+import industryAuthRouter from "./routes/industryProfessionalAuth";
 import mongoose from "mongoose";
 require("dotenv").config();
 
@@ -11,9 +12,10 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/", userRouter);
-app.use("/auth", authRouter);
+app.use("/talent", talentAuthRouter);
+app.use("/industry", industryAuthRouter);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 // MongoDB connection
 const connectDB = async () => {
