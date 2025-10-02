@@ -3,6 +3,8 @@ import cors from "cors";
 import userRouter from "./routes/userRoutes";
 import talentAuthRouter from "./routes/talentAuth";
 import industryAuthRouter from "./routes/industryProfessionalAuth";
+import talentSideRouter from "./routes/talentSideRoutes";
+import industrySideRouter from "./routes/industrySideRoutes";
 import mongoose from "mongoose";
 require("dotenv").config();
 
@@ -12,8 +14,10 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/", userRouter);
-app.use("/talent", talentAuthRouter);
-app.use("/industry", industryAuthRouter);
+app.use("/talentAuth", talentAuthRouter);
+app.use("/industryAuth", industryAuthRouter);
+app.use("/talent", talentSideRouter);
+app.use("/industry", industrySideRouter);
 
 const port = process.env.PORT || 3000;
 
